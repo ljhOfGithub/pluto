@@ -215,6 +215,9 @@ def is_feasible(prev_pc, gstate, curr_pc):
 # 2. We then check if two paths cannot be executed next to each other, for example they
 # are two paths yielded from this branch condition ``if (locked)"
 # 3. More checks are to come
+# 检测两个流是否真的存在竞争条件，例如，检查是否可以在路径I之后执行路径j。
+#1.我们首先从一个简单的检查开始，看看一个路径是否编辑了某个存储变量，从而使另一个路径不可行的
+#2。然后，我们检查两条路径是否不能相邻执行，例如，它们是由这个分支条件' ' if (locked)产生的两条路径。3.更多的检查即将到来
 def is_false_positive(i, j, all_gs, path_conditions):
     pathi = path_conditions[i]
     pathj = path_conditions[j]
@@ -231,6 +234,7 @@ def is_false_positive(i, j, all_gs, path_conditions):
 
 
 # Simple check if two flows of money are different
+# 简单检查两个资金流动是否不同
 def is_diff(flow1, flow2):
     if len(flow1) != len(flow2):
         return 1
